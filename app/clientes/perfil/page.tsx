@@ -116,9 +116,10 @@ export default function PerfilPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 lg:px-8 py-8 max-w-7xl">
-        <div className="space-y-6">
+    <>
+      <main className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 lg:px-8 py-8 max-w-7xl">
+          <div className="space-y-6">
             <Card>
               <CardContent className="pt-6">
                 <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
@@ -590,6 +591,6 @@ export default function PerfilPage() {
           </form>
         </DialogContent>
       </Dialog>
-    </main>
+    </>
   )
 }

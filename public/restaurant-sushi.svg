@@ -1,0 +1,44 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sushiBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cffafe" />
+      <stop offset="100%" stop-color="#a5f3fc" />
+    </linearGradient>
+    <linearGradient id="sushiPlate" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fefce8" />
+      <stop offset="100%" stop-color="#fed7aa" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sushiBg)" />
+  <g opacity="0.2" stroke="#0ea5e9" stroke-width="3">
+    <circle cx="250" cy="200" r="90" fill="none" />
+    <circle cx="980" cy="180" r="110" fill="none" />
+    <circle cx="1020" cy="600" r="70" fill="none" />
+  </g>
+  <rect x="180" y="480" width="840" height="80" rx="40" fill="#0f172a" opacity="0.4" />
+  <rect x="220" y="420" width="760" height="140" rx="30" fill="url(#sushiPlate)" />
+  <g transform="translate(260 450)">
+    <rect width="120" height="80" rx="15" fill="#fb7185" />
+    <rect x="20" y="10" width="80" height="60" rx="10" fill="#fef3c7" />
+    <circle cx="60" cy="40" r="18" fill="#16a34a" />
+  </g>
+  <g transform="translate(430 450)">
+    <rect width="120" height="80" rx="15" fill="#fb923c" />
+    <rect x="20" y="10" width="80" height="60" rx="10" fill="#fef3c7" />
+    <circle cx="60" cy="40" r="18" fill="#22c55e" />
+  </g>
+  <g transform="translate(600 450)">
+    <rect width="120" height="80" rx="15" fill="#f97316" />
+    <rect x="20" y="10" width="80" height="60" rx="10" fill="#fef3c7" />
+    <circle cx="60" cy="40" r="18" fill="#10b981" />
+  </g>
+  <g transform="translate(770 450)">
+    <rect width="120" height="80" rx="15" fill="#ec4899" />
+    <rect x="20" y="10" width="80" height="60" rx="10" fill="#fef3c7" />
+    <circle cx="60" cy="40" r="18" fill="#22c55e" />
+  </g>
+  <rect x="320" y="320" width="560" height="60" rx="30" fill="#0f172a" opacity="0.15" />
+  <rect x="420" y="260" width="360" height="50" rx="25" fill="#0f172a" opacity="0.15" />
+  <rect x="500" y="200" width="200" height="40" rx="20" fill="#0f172a" opacity="0.15" />
+</svg>
+

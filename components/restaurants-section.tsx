@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 import { MapPin, Star, Utensils, Wine, Coffee } from "lucide-react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
@@ -19,7 +20,7 @@ export const restaurants = [
     reviews: 3250,
     priceRange: "$$$$",
     specialties: ["Atún crudo", "Langosta", "Caviar"],
-    image: "restaurant-french",
+    image: "/restaurant-fine-dining.svg",
     description:
       "Restaurante de tres estrellas Michelin especializado en mariscos frescos con técnicas francesas contemporáneas. Una experiencia culinaria inolvidable en el corazón de Manhattan.",
     hours: "Lun-Sáb: 12:00 PM - 10:30 PM, Dom: Cerrado",
@@ -70,7 +71,7 @@ export const restaurants = [
     reviews: 2890,
     priceRange: "$$$$",
     specialties: ["Omakase", "Nigiri premium", "Sushi tradicional"],
-    image: "restaurant-sushi",
+    image: "/restaurant-sushi.svg",
     description:
       "Legendario restaurante de sushi con tres estrellas Michelin, dirigido por el maestro Jiro Ono. Una experiencia única de omakase con los mejores pescados del mercado de Tsukiji.",
     hours: "Lun-Vie: 11:30 AM - 2:00 PM, 5:30 PM - 8:30 PM, Sáb-Dom: Cerrado",
@@ -121,7 +122,7 @@ export const restaurants = [
     reviews: 2150,
     priceRange: "$$$$",
     specialties: ["Pasta artesanal", "Risotto", "Postres innovadores"],
-    image: "restaurant-italian",
+    image: "/restaurant-italian.svg",
     description:
       "Tres estrellas Michelin y nombrado mejor restaurante del mundo. El chef Massimo Bottura reinventa la cocina italiana tradicional con técnicas vanguardistas.",
     hours: "Mar-Sáb: 12:30 PM - 2:30 PM, 7:30 PM - 11:00 PM, Dom-Lun: Cerrado",
@@ -172,7 +173,7 @@ export const restaurants = [
     reviews: 2680,
     priceRange: "$$$$",
     specialties: ["Cocina molecular", "Vinos catalanes", "Postres creativos"],
-    image: "restaurant-spanish",
+    image: "/restaurant-spanish.svg",
     description:
       "Tres estrellas Michelin dirigido por los hermanos Roca. Combina tradición catalana con innovación culinaria de vanguardia y una bodega excepcional.",
     hours: "Mar-Sáb: 1:00 PM - 3:30 PM, 8:30 PM - 11:00 PM, Dom-Lun: Cerrado",
@@ -223,7 +224,7 @@ export const restaurants = [
     reviews: 1950,
     priceRange: "$$$$",
     specialties: ["Ingredientes nórdicos", "Fermentación", "Forrajeo"],
-    image: "restaurant-nordic",
+    image: "/restaurant-nordic.svg",
     description:
       "Pionero de la Nueva Cocina Nórdica con tres estrellas Michelin. El chef René Redzepi utiliza ingredientes locales y técnicas de fermentación para crear platos únicos.",
     hours: "Mié-Sáb: 6:00 PM - 12:00 AM, Dom-Mar: Cerrado",
@@ -274,7 +275,7 @@ export const restaurants = [
     reviews: 2340,
     priceRange: "$$$$",
     specialties: ["Cocina molecular india", "Menú emoji", "Especias exóticas"],
-    image: "restaurant-indian",
+    image: "/restaurant-indian.svg",
     description:
       "Restaurante innovador que fusiona cocina india con técnicas moleculares. El chef Gaggan Anand ofrece un menú único representado por emojis, creando una experiencia gastronómica lúdica.",
     hours: "Mar-Dom: 6:00 PM - 11:30 PM, Lun: Cerrado",
@@ -359,29 +360,35 @@ export function RestaurantsSection({ onSelectRestaurant }: RestaurantsSectionPro
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredRestaurants.map((restaurant) => (
             <Card key={restaurant.id} className="overflow-hidden hover:shadow-xl transition-all duration-300">
-              <div className="h-48 w-full bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-950/20 dark:to-red-950/20 flex items-center justify-center">
-                <Utensils className="h-16 w-16 text-orange-500/30" />
+              <div className="relative h-48 w-full overflow-hidden">
+                <Image
+                  src={restaurant.image}
+                  alt={restaurant.name}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="absolute top-3 right-3">
+                  <Badge className="bg-black/60 text-white backdrop-blur px-3 py-1">{restaurant.priceRange}</Badge>
+                </div>
+                <div className="absolute bottom-3 left-3 flex items-center gap-2 text-white">
+                  {getCuisineIcon(restaurant.cuisine)}
+                  <span className="text-sm font-medium">{restaurant.cuisine}</span>
+                </div>
               </div>
               <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className="font-bold text-xl mb-1">{restaurant.name}</h3>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <MapPin className="h-3 w-3" />
-                      <span>
-                        {restaurant.city}, {restaurant.country}
-                      </span>
-                    </div>
+                <div className="mb-3">
+                  <h3 className="font-bold text-xl mb-1">{restaurant.name}</h3>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <MapPin className="h-3 w-3" />
+                    <span>
+                      {restaurant.city}, {restaurant.country}
+                    </span>
                   </div>
-                  <Badge variant="secondary">{restaurant.priceRange}</Badge>
                 </div>
 
                 <div className="space-y-3 mb-4">
-                  <div className="flex items-center gap-2">
-                    {getCuisineIcon(restaurant.cuisine)}
-                    <span className="text-sm font-medium">{restaurant.cuisine}</span>
-                  </div>
-
                   <div className="flex items-center gap-2">
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <span className="font-semibold">{restaurant.rating}</span>

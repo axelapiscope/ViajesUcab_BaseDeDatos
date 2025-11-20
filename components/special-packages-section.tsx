@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Heart, Cake, MapPin, Calendar, Users } from "lucide-react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,7 @@ const specialPackages = [
     type: "quinceanera",
     title: "Tour de 15 Años Mágico",
     destination: "Orlando, Florida",
+    image: "/disney-castle-magic-kingdom.jpg",
     duration: "7 días / 6 noches",
     groupSize: "Hasta 20 personas",
     price: 4500,
@@ -35,6 +37,7 @@ const specialPackages = [
     type: "quinceanera",
     title: "Tour de 15 Años Caribeño",
     destination: "Cancún y Riviera Maya",
+    image: "/cancun-beach-resort.png",
     duration: "5 días / 4 noches",
     groupSize: "Hasta 15 personas",
     price: 3200,
@@ -57,6 +60,7 @@ const specialPackages = [
     type: "quinceanera",
     title: "Tour de 15 Años Europeo",
     destination: "París y Londres",
+    image: "/big-ben-london.jpg",
     duration: "10 días / 9 noches",
     groupSize: "Hasta 12 personas",
     price: 6800,
@@ -80,6 +84,7 @@ const specialPackages = [
     type: "honeymoon",
     title: "Luna de Miel en Maldivas",
     destination: "Maldivas",
+    image: "/maldives-water-villa.jpg",
     duration: "8 días / 7 noches",
     groupSize: "2 personas",
     price: 8500,
@@ -103,6 +108,7 @@ const specialPackages = [
     type: "honeymoon",
     title: "Luna de Miel en Santorini",
     destination: "Santorini, Grecia",
+    image: "/santorini-oia-sunset.jpg",
     duration: "7 días / 6 noches",
     groupSize: "2 personas",
     price: 5200,
@@ -126,6 +132,7 @@ const specialPackages = [
     type: "honeymoon",
     title: "Luna de Miel en Bali",
     destination: "Bali, Indonesia",
+    image: "/balinese-temple.png",
     duration: "10 días / 9 noches",
     groupSize: "2 personas",
     price: 6200,
@@ -185,12 +192,23 @@ export function SpecialPackagesSection() {
                 return (
                   <Card
                     key={pkg.id}
-                    className="overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    className="overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group"
                     onClick={() => handleViewPackage(pkg.id)}
                   >
-                    <div className="h-48 w-full bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-950/20 dark:to-purple-950/20 flex items-center justify-center relative">
-                      <Cake className="h-20 w-20 text-pink-500/30" />
+                    <div className="relative h-48 w-full overflow-hidden">
+                      <Image
+                        src={pkg.image}
+                        alt={pkg.title}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                       <Badge className="absolute top-3 right-3 bg-pink-600">-{pkg.discount}%</Badge>
+                      <div className="absolute bottom-3 left-3 flex items-center gap-2 text-white">
+                        <Cake className="h-5 w-5" />
+                        <span className="text-sm font-semibold">Tour de 15</span>
+                      </div>
                     </div>
                     <CardContent className="p-6">
                       <h4 className="font-bold text-xl mb-2">{pkg.title}</h4>
@@ -264,12 +282,23 @@ export function SpecialPackagesSection() {
                 return (
                   <Card
                     key={pkg.id}
-                    className="overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    className="overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group"
                     onClick={() => handleViewPackage(pkg.id)}
                   >
-                    <div className="h-48 w-full bg-gradient-to-br from-red-100 to-pink-100 dark:from-red-950/20 dark:to-pink-950/20 flex items-center justify-center relative">
-                      <Heart className="h-20 w-20 text-red-500/30" />
+                    <div className="relative h-48 w-full overflow-hidden">
+                      <Image
+                        src={pkg.image}
+                        alt={pkg.title}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                       <Badge className="absolute top-3 right-3 bg-red-600">-{pkg.discount}%</Badge>
+                      <div className="absolute bottom-3 left-3 flex items-center gap-2 text-white">
+                        <Heart className="h-5 w-5" />
+                        <span className="text-sm font-semibold">Luna de miel</span>
+                      </div>
                     </div>
                     <CardContent className="p-6">
                       <h4 className="font-bold text-xl mb-2">{pkg.title}</h4>

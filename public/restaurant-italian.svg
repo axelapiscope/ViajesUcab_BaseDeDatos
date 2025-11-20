@@ -1,0 +1,23 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="italianBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7" />
+      <stop offset="100%" stop-color="#fcd34d" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#italianBg)" />
+  <rect x="180" y="420" width="840" height="200" rx="30" fill="#fefce8" stroke="#f59e0b" stroke-width="6" />
+  <circle cx="600" cy="520" r="120" fill="#f97316" />
+  <circle cx="600" cy="520" r="80" fill="#fef3c7" />
+  <path d="M520 520 Q600 420 680 520 Q600 620 520 520Z" fill="#16a34a" opacity="0.8" />
+  <rect x="260" y="360" width="680" height="40" rx="20" fill="#f59e0b" opacity="0.5" />
+  <rect x="320" y="300" width="560" height="30" rx="15" fill="#f59e0b" opacity="0.4" />
+  <rect x="500" y="230" width="200" height="60" rx="30" fill="#fef9c3" stroke="#f59e0b" stroke-width="4" />
+  <rect x="430" y="200" width="60" height="120" rx="30" fill="#dc2626" opacity="0.6" />
+  <rect x="710" y="200" width="60" height="120" rx="30" fill="#16a34a" opacity="0.6" />
+  <rect x="220" y="460" width="40" height="140" rx="20" fill="#b45309" />
+  <rect x="940" y="460" width="40" height="140" rx="20" fill="#b45309" />
+  <circle cx="240" cy="630" r="40" fill="#fef3c7" stroke="#b45309" stroke-width="4" />
+  <circle cx="960" cy="630" r="40" fill="#fef3c7" stroke="#b45309" stroke-width="4" />
+</svg>
+

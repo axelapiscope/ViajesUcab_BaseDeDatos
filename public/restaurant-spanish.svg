@@ -1,0 +1,23 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="spanishBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fee2e2" />
+      <stop offset="100%" stop-color="#fecaca" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#spanishBg)" />
+  <rect x="160" y="420" width="880" height="200" rx="40" fill="#fff1f2" stroke="#f87171" stroke-width="6" />
+  <circle cx="400" cy="520" r="90" fill="#f97316" opacity="0.8" />
+  <circle cx="800" cy="520" r="90" fill="#facc15" opacity="0.8" />
+  <path d="M360 520 Q400 450 440 520 Q400 590 360 520Z" fill="#fef3c7" />
+  <path d="M760 520 Q800 450 840 520 Q800 590 760 520Z" fill="#fee2e2" />
+  <rect x="220" y="360" width="760" height="50" rx="25" fill="#f87171" opacity="0.6" />
+  <rect x="300" y="300" width="600" height="40" rx="20" fill="#f87171" opacity="0.5" />
+  <rect x="500" y="230" width="200" height="70" rx="35" fill="#fee2e2" stroke="#f87171" stroke-width="4" />
+  <rect x="250" y="460" width="40" height="140" rx="20" fill="#ea580c" />
+  <rect x="910" y="460" width="40" height="140" rx="20" fill="#ea580c" />
+  <circle cx="260" cy="630" r="40" fill="#fee2e2" stroke="#ea580c" stroke-width="4" />
+  <circle cx="940" cy="630" r="40" fill="#fee2e2" stroke="#ea580c" stroke-width="4" />
+  <rect x="460" y="620" width="280" height="30" rx="15" fill="#0f172a" opacity="0.2" />
+</svg>
+

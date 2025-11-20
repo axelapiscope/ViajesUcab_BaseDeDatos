@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import {
   ArrowLeft,
@@ -37,6 +38,7 @@ const allServices = [
     type: "vuelos",
     title: "Vuelo Directo a Miami",
     location: "Caracas - Miami",
+    image: "/airplane-in-flight.png",
     rating: 4.7,
     reviews: 342,
     price: 450,
@@ -82,6 +84,7 @@ const allServices = [
     type: "vuelos",
     title: "Vuelo a Ciudad de México",
     location: "Caracas - CDMX",
+    image: "/travel-itinerary.jpg",
     rating: 4.5,
     reviews: 289,
     price: 520,
@@ -122,6 +125,7 @@ const allServices = [
     type: "cruceros",
     title: "Crucero por el Caribe",
     location: "Miami - Bahamas - Jamaica",
+    image: "/cruise-ship-caribbean.jpg",
     rating: 4.8,
     reviews: 1250,
     price: 2100,
@@ -156,6 +160,7 @@ const allServices = [
     type: "traslados",
     title: "Traslado Aeropuerto - Hotel",
     location: "Miami International Airport",
+    image: "/luxury-hotel-room-orlando.jpg",
     rating: 4.9,
     reviews: 856,
     price: 45,
@@ -214,6 +219,7 @@ const allServices = [
     type: "hoteles",
     title: "Resort Todo Incluido",
     location: "Cancún, México",
+    image: "/luxury-resort.jpg",
     rating: 4.8,
     reviews: 2100,
     price: 1499,
@@ -246,6 +252,7 @@ const allServices = [
     type: "hoteles",
     title: "Hotel 5 Estrellas",
     location: "Punta Cana, República Dominicana",
+    image: "/luxury-hotel.jpg",
     rating: 4.9,
     reviews: 1680,
     price: 1080,
@@ -271,6 +278,7 @@ const allServices = [
     type: "hoteles",
     title: "Hotel Boutique Colonial",
     location: "Cartagena, Colombia",
+    image: "/cartagena-colonial-hotel.jpg",
     rating: 4.7,
     reviews: 650,
     price: 780,
@@ -295,6 +303,7 @@ const allServices = [
     type: "paquetes",
     title: "Paquete Completo Miami",
     location: "Vuelo + Hotel + Tours",
+    image: "/miami-beach-hotel.jpg",
     rating: 4.6,
     reviews: 980,
     price: 1890,
@@ -325,6 +334,7 @@ const allServices = [
     type: "paquetes",
     title: "Paquete Europa Clásica",
     location: "París + Roma + Madrid",
+    image: "/eiffel-tower-paris.png",
     rating: 4.9,
     reviews: 1450,
     price: 3500,
@@ -361,6 +371,7 @@ const allServices = [
     type: "paquetes",
     title: "Paquete Caribe Total",
     location: "Cancún + Punta Cana",
+    image: "/cancun-beach-resort.png",
     rating: 4.7,
     reviews: 820,
     price: 2400,
@@ -397,6 +408,7 @@ const allServices = [
     type: "traslados",
     title: "Traslado Caracas - Mérida",
     location: "Caracas - Mérida",
+    image: "/city-tour.jpg",
     rating: 4.6,
     reviews: 234,
     price: 85,
@@ -452,6 +464,7 @@ const allServices = [
     type: "traslados",
     title: "Traslado Las Vegas - Los Angeles",
     location: "Las Vegas - Los Angeles",
+    image: "/travel-itinerary.jpg",
     rating: 4.8,
     reviews: 567,
     price: 120,
@@ -500,6 +513,7 @@ const allServices = [
     type: "traslados",
     title: "Traslado Maracaibo - Maracay",
     location: "Maracaibo - Maracay",
+    image: "/city-tour.jpg",
     rating: 4.5,
     reviews: 189,
     price: 95,
@@ -554,6 +568,7 @@ const allServices = [
     type: "traslados",
     title: "Traslado Miami - Orlando",
     location: "Miami - Orlando",
+    image: "/universal-studios-orlando.jpg",
     rating: 4.7,
     reviews: 892,
     price: 95,
@@ -612,6 +627,7 @@ const allServices = [
     type: "trenes",
     title: "Tren Caracas - Valencia",
     location: "Caracas - Valencia",
+    image: "/train-illustration.svg",
     rating: 4.8,
     reviews: 456,
     price: 35,
@@ -654,6 +670,7 @@ const allServices = [
     type: "trenes",
     title: "Tren Madrid - Barcelona",
     location: "Madrid - Barcelona",
+    image: "/train-illustration.svg",
     rating: 4.9,
     reviews: 2340,
     price: 85,
@@ -696,6 +713,7 @@ const allServices = [
     type: "trenes",
     title: "Tren París - Londres",
     location: "París - Londres",
+    image: "/train-illustration.svg",
     rating: 4.9,
     reviews: 3890,
     price: 145,
@@ -827,7 +845,7 @@ export function ServiceDetailPage({ serviceId }: ServiceDetailPageProps) {
         title: service.title,
         location: service.location,
         price: service.price,
-        image: "",
+        image: service.image ?? "",
         type: service.type === "paquetes" ? "tour" : (service.type as "hotel" | "cruise" | "tour"),
         addedAt: new Date().toISOString(),
         originalPrice: service.originalPrice,
@@ -868,9 +886,30 @@ export function ServiceDetailPage({ serviceId }: ServiceDetailPageProps) {
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <div className="relative">
-              <div className="h-96 w-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg flex items-center justify-center">
-                <span className="text-6xl font-bold text-primary/30">{service.type.toUpperCase()}</span>
+            <div className="relative h-96 w-full rounded-lg overflow-hidden">
+              {service.image ? (
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <span className="text-6xl font-bold text-primary/30">{service.type.toUpperCase()}</span>
+                </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                <Badge variant="secondary" className="uppercase tracking-wide">
+                  {service.type}
+                </Badge>
+                <span className="text-white text-sm flex items-center gap-1">
+                  <MapPin className="h-4 w-4" />
+                  {service.location}
+                </span>
               </div>
             </div>
 

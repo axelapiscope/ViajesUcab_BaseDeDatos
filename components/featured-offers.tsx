@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 import { Star, Heart, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -25,6 +26,7 @@ export function FeaturedOffers() {
       id: 1,
       title: "Resort Todo Incluido - Cancún",
       location: "Cancún, México",
+      image: "/luxury-resort.jpg",
       rating: 4.8,
       reviews: 1250,
       originalPrice: 2500,
@@ -45,6 +47,7 @@ export function FeaturedOffers() {
       id: 2,
       title: "Crucero por el Caribe",
       location: "Miami - Bahamas - Jamaica",
+      image: "/cruise-ship-caribbean.jpg",
       rating: 4.6,
       reviews: 890,
       originalPrice: 3200,
@@ -64,6 +67,7 @@ export function FeaturedOffers() {
       id: 3,
       title: "Hotel 5 Estrellas - Punta Cana",
       location: "Punta Cana, República Dominicana",
+      image: "/luxury-hotel.jpg",
       rating: 4.9,
       reviews: 2100,
       originalPrice: 1800,
@@ -83,6 +87,7 @@ export function FeaturedOffers() {
       id: 4,
       title: "Hotel Boutique - Cartagena",
       location: "Cartagena, Colombia",
+      image: "/cartagena-colonial-hotel.jpg",
       rating: 4.7,
       reviews: 650,
       originalPrice: 1200,
@@ -101,6 +106,7 @@ export function FeaturedOffers() {
       id: 5,
       title: "Tour Completo - Buenos Aires",
       location: "Buenos Aires, Argentina",
+      image: "/buenos-aires-city-tour.jpg",
       rating: 4.8,
       reviews: 980,
       originalPrice: 900,
@@ -120,6 +126,7 @@ export function FeaturedOffers() {
       id: 6,
       title: "Hotel Frente al Mar - Miami",
       location: "Miami Beach, Estados Unidos",
+      image: "/miami-beach-hotel.jpg",
       rating: 4.5,
       reviews: 1450,
       originalPrice: 2800,
@@ -149,7 +156,7 @@ export function FeaturedOffers() {
         title: offer.title,
         location: offer.location,
         price: offer.discountPrice,
-        image: "",
+        image: offer.image ?? "",
         type: offer.type,
         addedAt: new Date().toISOString(),
         originalPrice: offer.originalPrice,
@@ -163,7 +170,7 @@ export function FeaturedOffers() {
       title: offer.title,
       location: offer.location,
       price: offer.discountPrice,
-      image: "",
+        image: offer.image ?? "",
       type: offer.type,
     })
   }
@@ -200,16 +207,30 @@ export function FeaturedOffers() {
                   className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] cursor-pointer"
                   onClick={() => handleViewOffer(offer)}
                 >
-                  <div className="relative group">
-                    <div className="h-48 w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                      <span className="text-4xl font-bold text-primary/30">{offer.type.toUpperCase()}</span>
-                    </div>
+                  <div className="relative h-48 w-full overflow-hidden">
+                    {offer.image ? (
+                      <Image
+                        src={offer.image}
+                        alt={offer.title}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    ) : (
+                      <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                        <span className="text-4xl font-bold text-primary/30">{offer.type.toUpperCase()}</span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                    <span className="absolute bottom-3 left-3 text-xs font-semibold tracking-wide uppercase text-white px-3 py-1 rounded-full bg-black/40 backdrop-blur">
+                      {offer.type}
+                    </span>
                     <button
                       onClick={(e) => {
                         e.stopPropagation()
                         toggleFavorite(offer)
                       }}
-                      className="absolute top-3 left-3 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all hover:scale-110"
+                      className="absolute top-3 right-3 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all hover:scale-110"
                     >
                       <Heart
                         className={cn(

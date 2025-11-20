@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 import { Plane, Ship, Building2, Package, Star, Heart, MapPin, Map, Car, Train } from "lucide-react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
@@ -28,6 +29,7 @@ const exploreOptions = [
     type: "vuelos" as ServiceType,
     title: "Vuelo Directo a Miami",
     location: "Caracas - Miami",
+    image: "/airplane-in-flight.png",
     rating: 4.7,
     reviews: 342,
     price: 450,
@@ -71,6 +73,7 @@ const exploreOptions = [
     type: "vuelos" as ServiceType,
     title: "Vuelo a Ciudad de México",
     location: "Caracas - CDMX",
+    image: "/travel-itinerary.jpg",
     rating: 4.5,
     reviews: 289,
     price: 520,
@@ -109,6 +112,7 @@ const exploreOptions = [
     type: "cruceros" as ServiceType,
     title: "Crucero por el Caribe",
     location: "Miami - Bahamas - Jamaica",
+    image: "/cruise-ship-caribbean.jpg",
     rating: 4.8,
     reviews: 1250,
     price: 2100,
@@ -129,6 +133,7 @@ const exploreOptions = [
     type: "cruceros" as ServiceType,
     title: "Crucero Mediterráneo",
     location: "Barcelona - Roma - Atenas",
+    image: "/santorini-cruise.jpg",
     rating: 4.9,
     reviews: 890,
     price: 2800,
@@ -149,6 +154,7 @@ const exploreOptions = [
     type: "hoteles" as ServiceType,
     title: "Resort Todo Incluido",
     location: "Cancún, México",
+    image: "/luxury-resort.jpg",
     rating: 4.8,
     reviews: 2100,
     price: 1499,
@@ -170,6 +176,7 @@ const exploreOptions = [
     type: "hoteles" as ServiceType,
     title: "Hotel 5 Estrellas",
     location: "Punta Cana, República Dominicana",
+    image: "/luxury-hotel.jpg",
     rating: 4.9,
     reviews: 1680,
     price: 1080,
@@ -190,6 +197,7 @@ const exploreOptions = [
     type: "hoteles" as ServiceType,
     title: "Hotel Boutique Colonial",
     location: "Cartagena, Colombia",
+    image: "/cartagena-colonial-hotel.jpg",
     rating: 4.7,
     reviews: 650,
     price: 780,
@@ -209,6 +217,7 @@ const exploreOptions = [
     type: "paquetes" as ServiceType,
     title: "Paquete Completo Miami",
     location: "Vuelo + Hotel + Tours",
+    image: "/miami-beach-hotel.jpg",
     rating: 4.6,
     reviews: 980,
     price: 1890,
@@ -239,6 +248,7 @@ const exploreOptions = [
     type: "paquetes" as ServiceType,
     title: "Paquete Europa Clásica",
     location: "París + Roma + Madrid",
+    image: "/eiffel-tower-paris.png",
     rating: 4.9,
     reviews: 1450,
     price: 3500,
@@ -275,6 +285,7 @@ const exploreOptions = [
     type: "paquetes" as ServiceType,
     title: "Paquete Caribe Total",
     location: "Cancún + Punta Cana",
+    image: "/punta-cana-beach-resort.jpg",
     rating: 4.7,
     reviews: 820,
     price: 2400,
@@ -311,6 +322,7 @@ const exploreOptions = [
     type: "traslados" as ServiceType,
     title: "Traslado Caracas - Mérida",
     location: "Caracas - Mérida",
+    image: "/city-tour.jpg",
     rating: 4.6,
     reviews: 234,
     price: 85,
@@ -340,6 +352,7 @@ const exploreOptions = [
     type: "traslados" as ServiceType,
     title: "Traslado Las Vegas - Los Angeles",
     location: "Las Vegas - Los Angeles",
+    image: "/buenos-aires-city-tour.jpg",
     rating: 4.8,
     reviews: 567,
     price: 120,
@@ -362,6 +375,7 @@ const exploreOptions = [
     type: "traslados" as ServiceType,
     title: "Traslado Maracaibo - Maracay",
     location: "Maracaibo - Maracay",
+    image: "/travel-itinerary.jpg",
     rating: 4.5,
     reviews: 189,
     price: 95,
@@ -390,6 +404,7 @@ const exploreOptions = [
     type: "traslados" as ServiceType,
     title: "Traslado Miami - Orlando",
     location: "Miami - Orlando",
+    image: "/universal-studios-orlando.jpg",
     rating: 4.7,
     reviews: 892,
     price: 95,
@@ -412,6 +427,7 @@ const exploreOptions = [
     type: "trenes" as ServiceType,
     title: "Tren Caracas - Valencia",
     location: "Caracas - Valencia",
+    image: "/travel-itinerary.jpg",
     rating: 4.8,
     reviews: 456,
     price: 35,
@@ -453,6 +469,7 @@ const exploreOptions = [
     type: "trenes" as ServiceType,
     title: "Tren Madrid - Barcelona",
     location: "Madrid - Barcelona",
+    image: "/train-illustration.svg",
     rating: 4.9,
     reviews: 2340,
     price: 85,
@@ -494,6 +511,7 @@ const exploreOptions = [
     type: "trenes" as ServiceType,
     title: "Tren París - Londres",
     location: "París - Londres",
+    image: "/train-illustration.svg",
     rating: 4.9,
     reviews: 3890,
     price: 145,
@@ -551,7 +569,7 @@ export function ExploreServices() {
         title: option.title,
         location: option.location,
         price: option.price,
-        image: "",
+        image: option.image ?? "",
         type: option.type === "paquetes" ? "tour" : (option.type as "hotel" | "cruise" | "tour"),
         addedAt: new Date().toISOString(),
         originalPrice: option.originalPrice,
@@ -609,16 +627,30 @@ export function ExploreServices() {
                 className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] cursor-pointer group"
                 onClick={() => handleViewDetail(option)}
               >
-                <div className="relative">
-                  <div className="h-48 w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                    <span className="text-4xl font-bold text-primary/30">{option.type.toUpperCase()}</span>
-                  </div>
+                <div className="relative h-48 w-full overflow-hidden">
+                  {option.image ? (
+                    <Image
+                      src={option.image}
+                      alt={option.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      <span className="text-4xl font-bold text-primary/30">{option.type.toUpperCase()}</span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <span className="absolute bottom-3 left-3 text-xs font-semibold tracking-wide uppercase text-white px-3 py-1 rounded-full bg-black/40 backdrop-blur">
+                    {option.type.toUpperCase()}
+                  </span>
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
                       toggleFavorite(option)
                     }}
-                    className="absolute top-3 left-3 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all hover:scale-110"
+                    className="absolute top-3 right-3 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all hover:scale-110"
                   >
                     <Heart
                       className={cn(

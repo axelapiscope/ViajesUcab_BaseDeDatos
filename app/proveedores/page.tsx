@@ -47,7 +47,7 @@ export default function ProveedorDashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => (
           <Link key={stat.title} href={stat.href}>
-            <Card className="card-hover gradient-primary/10 border-primary/20">
+            <Card className="gradient-primary/10 border-primary/20">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
                 <stat.icon className="h-4 w-4 text-primary" />
@@ -62,7 +62,7 @@ export default function ProveedorDashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="card-hover border-primary/20">
+        <Card className="border-primary/20">
           <CardHeader>
             <CardTitle>Gestión de Flota</CardTitle>
             <CardDescription>Administra tus vuelos, cruceros y tours</CardDescription>
@@ -82,7 +82,7 @@ export default function ProveedorDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="card-hover border-accent/20">
+        <Card className="border-accent/20">
           <CardHeader>
             <CardTitle>Destinos</CardTitle>
             <CardDescription>Configura y gestiona tus destinos</CardDescription>
@@ -102,7 +102,7 @@ export default function ProveedorDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="card-hover border-secondary/20">
+        <Card className="border-secondary/20">
           <CardHeader>
             <CardTitle>Promociones</CardTitle>
             <CardDescription>Gestiona tus ofertas especiales</CardDescription>
@@ -123,7 +123,7 @@ export default function ProveedorDashboard() {
         </Card>
       </div>
 
-      <Card className="card-hover">
+      <Card>
         <CardHeader>
           <CardTitle>Reportes de Rendimiento</CardTitle>
           <CardDescription>Análisis de tus servicios y reservas</CardDescription>

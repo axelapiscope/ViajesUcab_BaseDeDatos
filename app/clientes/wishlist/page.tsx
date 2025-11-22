@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { useWishlist } from "@/lib/wishlist-context"
 import { useCurrency } from "@/lib/currency-context"
-import { Heart, Trash2 } from "lucide-react"
+import { Heart, Trash2, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -17,15 +17,23 @@ export default function WishlistPage() {
     return (
       <main className="min-h-screen bg-background py-12">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center py-16">
-            <Heart className="h-24 w-24 mx-auto text-muted-foreground mb-6" />
-            <h1 className="text-3xl font-bold mb-4">Tu wishlist está vacía</h1>
-            <p className="text-muted-foreground mb-8">
-              Guarda tus servicios favoritos y podrás acceder a ellos fácilmente
-            </p>
-            <Link href="/">
-              <Button size="lg">Explorar servicios</Button>
-            </Link>
+          <div className="max-w-2xl mx-auto">
+            <div className="mb-6">
+              <Button variant="ghost" onClick={() => router.push("/")} className="gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                Volver
+              </Button>
+            </div>
+            <div className="text-center py-16">
+              <Heart className="h-24 w-24 mx-auto text-muted-foreground mb-6" />
+              <h1 className="text-3xl font-bold mb-4">Tu wishlist está vacía</h1>
+              <p className="text-muted-foreground mb-8">
+                Guarda tus servicios favoritos y podrás acceder a ellos fácilmente
+              </p>
+              <Link href="/">
+                <Button size="lg">Explorar servicios</Button>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
@@ -36,6 +44,12 @@ export default function WishlistPage() {
     <main className="min-h-screen bg-background py-12">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-6xl mx-auto">
+          <div className="mb-6">
+            <Button variant="ghost" onClick={() => router.push("/")} className="gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Volver
+            </Button>
+          </div>
           <div className="mb-8">
             <h1 className="text-3xl font-bold mb-2">Mi Wishlist ({items.length})</h1>
             <p className="text-muted-foreground">Tus servicios guardados para consultar más tarde</p>
@@ -48,12 +62,25 @@ export default function WishlistPage() {
               return (
                 <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="relative">
-                    <div
-                      className="h-48 w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center cursor-pointer"
-                      onClick={() => router.push(`/servicio/${item.id}`)}
-                    >
-                      <span className="text-4xl font-bold text-primary/30">{item.type.toUpperCase()}</span>
-                    </div>
+                    {item.image && item.image !== "/placeholder.svg" ? (
+                      <div
+                        className="h-48 w-full relative overflow-hidden cursor-pointer"
+                        onClick={() => router.push(`/servicio/${item.id}`)}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className="h-48 w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center cursor-pointer"
+                        onClick={() => router.push(`/servicio/${item.id}`)}
+                      >
+                        <span className="text-4xl font-bold text-primary/30">{item.type.toUpperCase()}</span>
+                      </div>
+                    )}
                     <button
                       onClick={() => removeFromWishlist(item.id)}
                       className="absolute top-3 left-3 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all"

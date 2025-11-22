@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, type ReactNode, useCallback, useRef, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
 
 export interface CartItem {
@@ -29,41 +29,76 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const { toast } = useToast()
+  const toastRef = useRef(toast)
 
-  const addToCart = (item: CartItem) => {
+  // Keep toast ref updated
+  useEffect(() => {
+    toastRef.current = toast
+  }, [toast])
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("cartItems")
+    if (stored) {
+      try {
+        setItems(JSON.parse(stored))
+      } catch (e) {
+        console.error("Error loading cart:", e)
+      }
+    }
+  }, [])
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    if (items.length > 0) {
+      localStorage.setItem("cartItems", JSON.stringify(items))
+    } else {
+      localStorage.removeItem("cartItems")
+    }
+  }, [items])
+
+  const addToCart = useCallback((item: CartItem) => {
     setItems((prev) => {
       const exists = prev.find((i) => i.id === item.id)
       if (exists) {
-        toast({
-          title: "Ya está en el carrito",
-          description: "Este artículo ya fue agregado anteriormente",
-          variant: "destructive",
-        })
+        setTimeout(() => {
+          toastRef.current({
+            title: "Ya está en el carrito",
+            description: "Este artículo ya fue agregado anteriormente",
+            variant: "destructive",
+          })
+        }, 0)
         return prev
       }
-      toast({
-        title: "Agregado al carrito",
-        description: `${item.title} se agregó a tu carrito`,
-      })
+      setTimeout(() => {
+        toastRef.current({
+          title: "Agregado al carrito",
+          description: `${item.title} se agregó a tu carrito`,
+        })
+      }, 0)
       return [...prev, item]
     })
-  }
+  }, [])
 
-  const removeFromCart = (id: number) => {
+  const removeFromCart = useCallback((id: number) => {
     setItems((prev) => prev.filter((item) => item.id !== id))
-    toast({
-      title: "Eliminado del carrito",
-      description: "El artículo se eliminó de tu carrito",
-    })
-  }
+    setTimeout(() => {
+      toastRef.current({
+        title: "Eliminado del carrito",
+        description: "El artículo se eliminó de tu carrito",
+      })
+    }, 0)
+  }, [])
 
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     setItems([])
-    toast({
-      title: "Carrito vaciado",
-      description: "Todos los artículos fueron eliminados",
-    })
-  }
+    setTimeout(() => {
+      toastRef.current({
+        title: "Carrito vaciado",
+        description: "Todos los artículos fueron eliminados",
+      })
+    }, 0)
+  }, [])
 
   const totalItems = items.length
   const totalPrice = items.reduce((sum, item) => sum + item.price, 0)

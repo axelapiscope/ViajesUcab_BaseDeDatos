@@ -49,7 +49,7 @@ export default function LoginPage() {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Credenciales inválidas",
+        description: error instanceof Error ? error.message : "Credenciales inválidas",
         variant: "destructive",
       })
     } finally {

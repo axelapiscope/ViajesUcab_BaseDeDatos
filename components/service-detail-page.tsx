@@ -1758,7 +1758,7 @@ export function ServiceDetailPage({ serviceId }: ServiceDetailPageProps) {
                   </Button>
 
                   <Button className="w-full" size="lg" onClick={handleNext}>
-                    Siguiente
+                    Comprar
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </div>

@@ -82,7 +82,24 @@ export function UserProvider({ children }: { children: ReactNode }) {
     address?: string,
     travelDocuments?: { venezuelanId?: string; passport?: string },
   ) => {
+    // Validate email and password are provided
+    if (!email || !password) {
+      throw new Error("Email y contraseña son requeridos")
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      throw new Error("Email inválido")
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+      throw new Error("La contraseña debe tener al menos 6 caracteres")
+    }
+
     // Mock authentication - in production, this would call an API
+    // For now, we'll create a user if credentials are valid
     const newUser: User = {
       id: Date.now().toString(),
       name: name || "Usuario ViajesUCAB",

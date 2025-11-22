@@ -114,6 +114,20 @@ export default function ItinerarioPage() {
       return
     }
 
+    // Validate that selected date is not in the past
+    const selectedDateObj = new Date(selectedDate)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    
+    if (selectedDateObj < today) {
+      toast({
+        title: "Fecha inválida",
+        description: "No se pueden seleccionar fechas pasadas",
+        variant: "destructive",
+      })
+      return
+    }
+
     const item: ItineraryItem = {
       id: Date.now().toString(),
       type,
@@ -160,6 +174,47 @@ export default function ItinerarioPage() {
         variant: "destructive",
       })
       return
+    }
+
+    // Validate dates if provided
+    if (startDate) {
+      const startDateObj = new Date(startDate)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      
+      if (startDateObj < today) {
+        toast({
+          title: "Fecha inválida",
+          description: "La fecha de inicio no puede ser en el pasado",
+          variant: "destructive",
+        })
+        return
+      }
+    }
+
+    if (endDate) {
+      const endDateObj = new Date(endDate)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      
+      if (endDateObj < today) {
+        toast({
+          title: "Fecha inválida",
+          description: "La fecha de fin no puede ser en el pasado",
+          variant: "destructive",
+        })
+        return
+      }
+
+      // Validate end date is after start date
+      if (startDate && new Date(startDate) > endDateObj) {
+        toast({
+          title: "Fecha inválida",
+          description: "La fecha de fin debe ser posterior a la fecha de inicio",
+          variant: "destructive",
+        })
+        return
+      }
     }
 
     const newItinerary = {
@@ -308,11 +363,21 @@ export default function ItinerarioPage() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label>Fecha de Inicio</Label>
-                    <Input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                    <Input 
+                      type="date" 
+                      value={startDate} 
+                      onChange={(e) => setStartDate(e.target.value)}
+                      min={new Date().toISOString().split("T")[0]}
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label>Fecha de Fin</Label>
-                    <Input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} min={startDate} />
+                    <Input 
+                      type="date" 
+                      value={endDate} 
+                      onChange={(e) => setEndDate(e.target.value)} 
+                      min={startDate || new Date().toISOString().split("T")[0]}
+                    />
                   </div>
                 </div>
                 {startDate && endDate && (
@@ -349,6 +414,7 @@ export default function ItinerarioPage() {
                         value={selectedDate}
                         onChange={(e) => setSelectedDate(e.target.value)}
                         className="border-2"
+                        min={new Date().toISOString().split("T")[0]}
                       />
                       <p className="text-xs text-muted-foreground">
                         Selecciona la fecha en la que deseas realizar esta actividad

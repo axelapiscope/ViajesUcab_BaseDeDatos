@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { useUser, type UserRole } from "@/lib/user-context"
 
@@ -14,8 +14,20 @@ export function AuthGuard({ children, requiredRole, redirectTo = "/auth/login" }
   const { user, isAuthenticated, hasRole } = useUser()
   const router = useRouter()
   const pathname = usePathname()
+  const [isChecking, setIsChecking] = useState(true)
 
   useEffect(() => {
+    // Wait a bit to ensure user state is loaded from localStorage
+    const timer = setTimeout(() => {
+      setIsChecking(false)
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (isChecking) return
+
     // Si no está autenticado, redirigir a login
     if (!isAuthenticated) {
       router.push(`${redirectTo}?redirect=${encodeURIComponent(pathname)}`)
@@ -33,10 +45,10 @@ export function AuthGuard({ children, requiredRole, redirectTo = "/auth/login" }
         router.push("/clientes")
       }
     }
-  }, [isAuthenticated, user, requiredRole, hasRole, router, pathname, redirectTo])
+  }, [isAuthenticated, user, requiredRole, hasRole, router, pathname, redirectTo, isChecking])
 
   // Mostrar loading mientras se verifica
-  if (!isAuthenticated || (requiredRole && user && !hasRole(requiredRole))) {
+  if (isChecking || !isAuthenticated || (requiredRole && user && !hasRole(requiredRole))) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">

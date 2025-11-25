@@ -57,7 +57,7 @@ export const restaurants = [
         date: "10 Dic 2024",
       },
     ],
-    photos: ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"],
+    photos: ["/luxury-hotel.jpg", "/miami-beach-hotel.jpg", "/luxury-resort.jpg", "/beach-resort.jpg", "/santorini-oia-sunset.jpg", "/maldives-beach-dinner.jpg"],
   },
   {
     id: 2,
@@ -108,7 +108,7 @@ export const restaurants = [
         date: "18 Dic 2024",
       },
     ],
-    photos: ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"],
+    photos: ["/luxury-hotel.jpg", "/miami-beach-hotel.jpg", "/luxury-resort.jpg", "/beach-resort.jpg", "/santorini-oia-sunset.jpg", "/maldives-beach-dinner.jpg"],
   },
   {
     id: 3,
@@ -159,7 +159,7 @@ export const restaurants = [
         date: "19 Dic 2024",
       },
     ],
-    photos: ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"],
+    photos: ["/luxury-hotel.jpg", "/miami-beach-hotel.jpg", "/luxury-resort.jpg", "/beach-resort.jpg", "/santorini-oia-sunset.jpg", "/maldives-beach-dinner.jpg"],
   },
   {
     id: 4,
@@ -210,7 +210,7 @@ export const restaurants = [
         date: "17 Dic 2024",
       },
     ],
-    photos: ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"],
+    photos: ["/luxury-hotel.jpg", "/miami-beach-hotel.jpg", "/luxury-resort.jpg", "/beach-resort.jpg", "/santorini-oia-sunset.jpg", "/maldives-beach-dinner.jpg"],
   },
   {
     id: 5,
@@ -261,7 +261,7 @@ export const restaurants = [
         date: "16 Dic 2024",
       },
     ],
-    photos: ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"],
+    photos: ["/luxury-hotel.jpg", "/miami-beach-hotel.jpg", "/luxury-resort.jpg", "/beach-resort.jpg", "/santorini-oia-sunset.jpg", "/maldives-beach-dinner.jpg"],
   },
   {
     id: 6,
@@ -312,7 +312,7 @@ export const restaurants = [
         date: "14 Dic 2024",
       },
     ],
-    photos: ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"],
+    photos: ["/luxury-hotel.jpg", "/miami-beach-hotel.jpg", "/luxury-resort.jpg", "/beach-resort.jpg", "/santorini-oia-sunset.jpg", "/maldives-beach-dinner.jpg"],
   },
 ]
 

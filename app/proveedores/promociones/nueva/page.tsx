@@ -43,7 +43,7 @@ export default function NuevaPromocionPage() {
         </div>
       </div>
 
-      <Card className="card-hover gradient-secondary/10 border-secondary/20">
+      <Card className="gradient-secondary/10 border-secondary/20">
         <CardHeader>
           <CardTitle>Detalles de la Promoción</CardTitle>
           <CardDescription>Completa la información de tu nueva promoción</CardDescription>

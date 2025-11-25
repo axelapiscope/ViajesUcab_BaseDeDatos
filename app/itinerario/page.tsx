@@ -308,11 +308,21 @@ export default function ItinerarioPage() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label>Fecha de Inicio</Label>
-                    <Input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                    <Input 
+                      type="date" 
+                      value={startDate} 
+                      onChange={(e) => setStartDate(e.target.value)}
+                      min={new Date().toISOString().split("T")[0]}
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label>Fecha de Fin</Label>
-                    <Input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} min={startDate} />
+                    <Input 
+                      type="date" 
+                      value={endDate} 
+                      onChange={(e) => setEndDate(e.target.value)} 
+                      min={startDate || new Date().toISOString().split("T")[0]} 
+                    />
                   </div>
                 </div>
                 {startDate && endDate && (
@@ -349,6 +359,7 @@ export default function ItinerarioPage() {
                         value={selectedDate}
                         onChange={(e) => setSelectedDate(e.target.value)}
                         className="border-2"
+                        min={new Date().toISOString().split("T")[0]}
                       />
                       <p className="text-xs text-muted-foreground">
                         Selecciona la fecha en la que deseas realizar esta actividad

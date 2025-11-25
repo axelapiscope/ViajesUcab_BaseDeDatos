@@ -98,24 +98,50 @@ export function UserProvider({ children }: { children: ReactNode }) {
       throw new Error("La contraseña debe tener al menos 6 caracteres")
     }
 
-    // Mock authentication - in production, this would call an API
-    // For now, we'll create a user if credentials are valid
-    const newUser: User = {
-      id: Date.now().toString(),
-      name: name || "Usuario ViajesUCAB",
-      email,
-      phone: phone || "+58 412-555-0100",
-      address: address || "Caracas, Venezuela",
-      role,
-      memberSince: new Date().toISOString(),
-      travelDocuments: travelDocuments || {},
-      carbonCompensations: {
-        count: 0,
-        totalAmount: 0,
-        history: [],
-      },
+    // If name is provided, this is a registration - create new user
+    if (name) {
+      // Check if user already exists
+      const existingUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]")
+      const userExists = existingUsers.find((u: User) => u.email === email)
+      if (userExists) {
+        throw new Error("Este correo electrónico ya está registrado")
+      }
+
+      // Create new user
+      const newUser: User = {
+        id: Date.now().toString(),
+        name,
+        email,
+        phone: phone || "+58 412-555-0100",
+        address: address || "Caracas, Venezuela",
+        role,
+        memberSince: new Date().toISOString(),
+        travelDocuments: travelDocuments || {},
+        carbonCompensations: {
+          count: 0,
+          totalAmount: 0,
+          history: [],
+        },
+      }
+      
+      // Save to registered users
+      existingUsers.push(newUser)
+      localStorage.setItem("registeredUsers", JSON.stringify(existingUsers))
+      setUser(newUser)
+      return
     }
-    setUser(newUser)
+
+    // This is a login - check if user exists in registered users
+    const existingUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]")
+    const user = existingUsers.find((u: User) => u.email === email)
+    
+    if (!user) {
+      throw new Error("Usuario no registrado. Por favor regístrate primero.")
+    }
+
+    // In a real app, we would verify the password hash here
+    // For now, we'll just check if the user exists
+    setUser(user)
   }
 
   const hasRole = (role: UserRole | UserRole[]): boolean => {

@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Plane, Ship, MapPin, Plus, Pencil, Trash2 } from "lucide-react"
+import { Plane, Ship, MapPin, Plus, Pencil, Trash2, ArrowLeft } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 type Servicio = {
   id: string
@@ -55,6 +56,7 @@ const serviciosIniciales: Servicio[] = [
 
 export default function FlotaPage() {
   const [servicios] = useState<Servicio[]>(serviciosIniciales)
+  const router = useRouter()
 
   const vuelos = servicios.filter((s) => s.tipo === "vuelo")
   const cruceros = servicios.filter((s) => s.tipo === "crucero")
@@ -62,6 +64,12 @@ export default function FlotaPage() {
 
   return (
     <div className="space-y-6">
+      <div className="mb-4">
+        <Button variant="ghost" onClick={() => router.push("/proveedores")} className="gap-2">
+          <ArrowLeft className="h-4 w-4" />
+          Volver
+        </Button>
+      </div>
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Gestión de Flota</h1>
@@ -91,7 +99,7 @@ export default function FlotaPage() {
 
         <TabsContent value="vuelos" className="space-y-4">
           {vuelos.map((vuelo) => (
-            <Card key={vuelo.id} className="hover:shadow-lg transition-shadow">
+            <Card key={vuelo.id} className="transition-shadow">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div>
@@ -137,7 +145,7 @@ export default function FlotaPage() {
 
         <TabsContent value="cruceros" className="space-y-4">
           {cruceros.map((crucero) => (
-            <Card key={crucero.id} className="hover:shadow-lg transition-shadow">
+            <Card key={crucero.id} className="transition-shadow">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div>
@@ -181,7 +189,7 @@ export default function FlotaPage() {
 
         <TabsContent value="tours" className="space-y-4">
           {tours.map((tour) => (
-            <Card key={tour.id} className="hover:shadow-lg transition-shadow">
+            <Card key={tour.id} className="transition-shadow">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div>

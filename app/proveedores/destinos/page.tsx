@@ -4,7 +4,8 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Plus, Globe } from "lucide-react"
+import { MapPin, Plus, Globe, ArrowLeft } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 type Destino = {
   id: string
@@ -44,9 +45,16 @@ const destinosIniciales: Destino[] = [
 
 export default function DestinosPage() {
   const [destinos] = useState<Destino[]>(destinosIniciales)
+  const router = useRouter()
 
   return (
     <div className="space-y-6">
+      <div className="mb-4">
+        <Button variant="ghost" onClick={() => router.push("/proveedores")} className="gap-2">
+          <ArrowLeft className="h-4 w-4" />
+          Volver
+        </Button>
+      </div>
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Configuración de Destinos</h1>
@@ -60,7 +68,7 @@ export default function DestinosPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {destinos.map((destino) => (
-          <Card key={destino.id} className="hover:shadow-lg transition-shadow">
+          <Card key={destino.id} className="transition-shadow">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2">

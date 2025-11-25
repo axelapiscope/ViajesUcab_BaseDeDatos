@@ -119,9 +119,17 @@ export function RestaurantDetail({ restaurant, onBack }: RestaurantDetailProps) 
                   {restaurant.photos.map((photo, idx) => (
                     <div
                       key={idx}
-                      className="aspect-square rounded-lg bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-950/20 dark:to-red-950/20 flex items-center justify-center"
+                      className="aspect-square rounded-lg overflow-hidden relative"
                     >
-                      <span className="text-sm text-muted-foreground">Foto {idx + 1}</span>
+                      <img
+                        src={photo}
+                        alt={`${restaurant.name} - Foto ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement
+                          target.src = "/placeholder.jpg"
+                        }}
+                      />
                     </div>
                   ))}
                 </div>

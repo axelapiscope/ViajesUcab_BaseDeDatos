@@ -47,7 +47,7 @@ export default function NuevoServicioPage() {
         </div>
       </div>
 
-      <Card className="card-hover">
+      <Card>
         <CardHeader>
           <CardTitle>Información del Servicio</CardTitle>
           <CardDescription>Selecciona el tipo de servicio y completa los datos</CardDescription>

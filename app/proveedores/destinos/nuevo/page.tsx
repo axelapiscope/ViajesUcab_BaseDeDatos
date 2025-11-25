@@ -44,7 +44,7 @@ export default function NuevoDestinoPage() {
         </div>
       </div>
 
-      <Card className="card-hover">
+      <Card>
         <CardHeader>
           <CardTitle>Información del Destino</CardTitle>
           <CardDescription>Agrega los detalles del destino para que los clientes puedan encontrarlo</CardDescription>

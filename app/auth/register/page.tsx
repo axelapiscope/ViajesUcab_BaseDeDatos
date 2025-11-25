@@ -22,7 +22,7 @@ export default function RegisterPage() {
     confirmPassword: "",
     phone: "",
     address: "",
-    role: "cliente" as UserRole,
+    role: "cliente" as UserRole, // Role will be validated with DB later
     venezuelanId: "",
     passport: "",
   })
@@ -91,22 +91,6 @@ export default function RegisterPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="role">Tipo de Usuario</Label>
-              <Select
-                value={formData.role}
-                onValueChange={(value) => setFormData({ ...formData, role: value as UserRole })}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="cliente">Cliente</SelectItem>
-                  <SelectItem value="proveedor">Proveedor</SelectItem>
-                  <SelectItem value="admin">Administrador</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
             <div className="space-y-2">
               <Label htmlFor="name">Nombre completo</Label>
               <Input

@@ -47,7 +47,7 @@ export default function ProveedorDashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => (
           <Link key={stat.title} href={stat.href}>
-            <Card className="gradient-primary/10 border-primary/20">
+            <Card className="gradient-primary/10 border-primary/20 transition-shadow hover:shadow-md">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
                 <stat.icon className="h-4 w-4 text-primary" />
@@ -74,11 +74,6 @@ export default function ProveedorDashboard() {
                 Ver Flota Completa
               </Button>
             </Link>
-            <Link href="/proveedores/flota/nuevo">
-              <Button className="w-full gradient-primary">
-                Agregar Nuevo Servicio
-              </Button>
-            </Link>
           </CardContent>
         </Card>
 
@@ -94,11 +89,6 @@ export default function ProveedorDashboard() {
                 Ver Todos los Destinos
               </Button>
             </Link>
-            <Link href="/proveedores/destinos/nuevo">
-              <Button className="w-full gradient-accent">
-                Agregar Nuevo Destino
-              </Button>
-            </Link>
           </CardContent>
         </Card>
 
@@ -112,11 +102,6 @@ export default function ProveedorDashboard() {
               <Button variant="outline" className="w-full justify-start">
                 <Tag className="mr-2 h-4 w-4" />
                 Ver Promociones
-              </Button>
-            </Link>
-            <Link href="/proveedores/promociones/nueva">
-              <Button className="w-full gradient-secondary">
-                Crear Nueva Promoción
               </Button>
             </Link>
           </CardContent>
@@ -136,14 +121,18 @@ export default function ProveedorDashboard() {
                 Ver Reportes Completos
               </Button>
             </Link>
-            <Button variant="outline" className="w-full justify-start">
-              <Users className="mr-2 h-4 w-4" />
-              Análisis de Clientes
-            </Button>
-            <Button variant="outline" className="w-full justify-start">
-              <Package className="mr-2 h-4 w-4" />
-              Rendimiento por Servicio
-            </Button>
+            <Link href="/proveedores/reportes?tab=clientes">
+              <Button variant="outline" className="w-full justify-start">
+                <Users className="mr-2 h-4 w-4" />
+                Análisis de Clientes
+              </Button>
+            </Link>
+            <Link href="/proveedores/reportes?tab=servicios">
+              <Button variant="outline" className="w-full justify-start">
+                <Package className="mr-2 h-4 w-4" />
+                Rendimiento por Servicio
+              </Button>
+            </Link>
           </div>
         </CardContent>
       </Card>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   Plus,
   Trash2,
@@ -98,6 +98,14 @@ export default function ItinerarioPage() {
   const [showAddForm, setShowAddForm] = useState(true)
   const [selectedType, setSelectedType] = useState<ItineraryItem["type"]>("destination")
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0])
+  
+  // Ensure selectedDate is not in the past
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0]
+    if (selectedDate < today) {
+      setSelectedDate(today)
+    }
+  }, [selectedDate])
   const { savedItineraries, addItinerary, deleteItinerary } = useItinerary()
   const { toast } = useToast()
   const { formatPrice } = useCurrency()

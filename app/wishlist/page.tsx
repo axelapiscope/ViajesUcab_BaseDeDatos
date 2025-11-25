@@ -48,12 +48,25 @@ export default function WishlistPage() {
               return (
                 <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="relative">
-                    <div
-                      className="h-48 w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center cursor-pointer"
-                      onClick={() => router.push(`/servicio/${item.id}`)}
-                    >
-                      <span className="text-4xl font-bold text-primary/30">{item.type.toUpperCase()}</span>
-                    </div>
+                    {item.image && item.image !== "/placeholder.svg" ? (
+                      <div
+                        className="h-48 w-full relative overflow-hidden cursor-pointer"
+                        onClick={() => router.push(`/servicio/${item.id}`)}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className="h-48 w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center cursor-pointer"
+                        onClick={() => router.push(`/servicio/${item.id}`)}
+                      >
+                        <span className="text-4xl font-bold text-primary/30">{item.type.toUpperCase()}</span>
+                      </div>
+                    )}
                     <button
                       onClick={() => removeFromWishlist(item.id)}
                       className="absolute top-3 left-3 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all"

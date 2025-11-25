@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import { Plane, Ship, Building2, Package, Star, Heart, MapPin, Map, Car, Train } from "lucide-react"
+import { Plane, Ship, Building2, Package, Star, Heart, MapPin, Map, Car, Train, Hotel, Utensils, Clock } from "lucide-react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -73,7 +73,7 @@ const exploreOptions = [
     type: "vuelos" as ServiceType,
     title: "Vuelo a Ciudad de México",
     location: "Caracas - CDMX",
-    image: "/travel-itinerary.jpg",
+    image: "/airplane-in-flight.png",
     rating: 4.5,
     reviews: 289,
     price: 520,
@@ -427,7 +427,7 @@ const exploreOptions = [
     type: "trenes" as ServiceType,
     title: "Tren Caracas - Valencia",
     location: "Caracas - Valencia",
-    image: "/travel-itinerary.jpg",
+    image: "/city-tour.jpg",
     rating: 4.8,
     reviews: 456,
     price: 35,
@@ -469,7 +469,7 @@ const exploreOptions = [
     type: "trenes" as ServiceType,
     title: "Tren Madrid - Barcelona",
     location: "Madrid - Barcelona",
-    image: "/train-illustration.svg",
+    image: "/eiffel-tower-paris.png",
     rating: 4.9,
     reviews: 2340,
     price: 85,
@@ -511,7 +511,7 @@ const exploreOptions = [
     type: "trenes" as ServiceType,
     title: "Tren París - Londres",
     location: "París - Londres",
-    image: "/train-illustration.svg",
+    image: "/big-ben-london.jpg",
     rating: 4.9,
     reviews: 3890,
     price: 145,
@@ -680,7 +680,7 @@ export function ExploreServices() {
                     <div className="mt-4 space-y-3 border-t pt-3">
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.package.transfers.icon className="h-4 w-4 text-primary" />
+                          <Plane className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Traslados:</span>
                         </div>
                         <ul className="text-xs text-muted-foreground space-y-1 ml-6">
@@ -692,7 +692,7 @@ export function ExploreServices() {
 
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.package.accommodation.icon className="h-4 w-4 text-primary" />
+                          <Hotel className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Hospedaje:</span>
                         </div>
                         <div className="text-xs text-muted-foreground ml-6 space-y-1">
@@ -704,7 +704,7 @@ export function ExploreServices() {
 
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.package.meals.icon className="h-4 w-4 text-primary" />
+                          <Utensils className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Comidas:</span>
                         </div>
                         <ul className="text-xs text-muted-foreground space-y-1 ml-6">
@@ -716,7 +716,7 @@ export function ExploreServices() {
 
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.package.activities.icon className="h-4 w-4 text-primary" />
+                          <Map className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Actividades:</span>
                         </div>
                         <ul className="text-xs text-muted-foreground space-y-1 ml-6">
@@ -732,7 +732,7 @@ export function ExploreServices() {
                     <div className="mt-4 space-y-3 border-t pt-3">
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.transferDetails.vehicleType.icon className="h-4 w-4 text-primary" />
+                          <Car className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Tipo de Vehículo:</span>
                         </div>
                         <p className="text-xs text-muted-foreground ml-6">{option.transferDetails.vehicleType}</p>
@@ -740,7 +740,7 @@ export function ExploreServices() {
 
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.transferDetails.departure.icon className="h-4 w-4 text-primary" />
+                          <MapPin className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Salida:</span>
                         </div>
                         <p className="text-xs text-muted-foreground ml-6">{option.transferDetails.departure}</p>
@@ -748,7 +748,7 @@ export function ExploreServices() {
 
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.transferDetails.arrival.icon className="h-4 w-4 text-primary" />
+                          <MapPin className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Llegada:</span>
                         </div>
                         <p className="text-xs text-muted-foreground ml-6">{option.transferDetails.arrival}</p>
@@ -756,7 +756,7 @@ export function ExploreServices() {
 
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.transferDetails.departureTime.icon className="h-4 w-4 text-primary" />
+                          <Clock className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Hora de Salida:</span>
                         </div>
                         <p className="text-xs text-muted-foreground ml-6">{option.transferDetails.departureTime}</p>
@@ -764,7 +764,7 @@ export function ExploreServices() {
 
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.transferDetails.arrivalTime.icon className="h-4 w-4 text-primary" />
+                          <Clock className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Hora de Llegada:</span>
                         </div>
                         <p className="text-xs text-muted-foreground ml-6">{option.transferDetails.arrivalTime}</p>
@@ -772,7 +772,7 @@ export function ExploreServices() {
 
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <option.transferDetails.stops.icon className="h-4 w-4 text-primary" />
+                          <MapPin className="h-4 w-4 text-primary" />
                           <span className="font-semibold text-sm">Paradas:</span>
                         </div>
                         <ul className="text-xs text-muted-foreground space-y-1 ml-6">

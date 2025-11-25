@@ -2,10 +2,13 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, DollarSign, Users, Calendar, BarChart3 } from "lucide-react"
+import { TrendingUp, DollarSign, Users, Calendar, BarChart3, ArrowLeft } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
+import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
 
 export default function ReportesPage() {
+  const router = useRouter()
   const stats = [
     { label: "Reservas Totales", value: "1,234", change: "+12.5%", icon: Calendar },
     { label: "Ingresos del Mes", value: "$45,230", change: "+18.2%", icon: DollarSign },
@@ -21,6 +24,12 @@ export default function ReportesPage() {
 
   return (
     <div className="space-y-6">
+      <div className="mb-4">
+        <Button variant="ghost" onClick={() => router.push("/proveedores")} className="gap-2">
+          <ArrowLeft className="h-4 w-4" />
+          Volver
+        </Button>
+      </div>
       <div>
         <h1 className="text-3xl font-bold text-foreground">Reportes de Rendimiento</h1>
         <p className="text-muted-foreground">Análisis detallado de tus servicios y reservas</p>
@@ -28,7 +37,7 @@ export default function ReportesPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.label} className="card-hover gradient-primary/10 border-primary/20">
+          <Card key={stat.label} className=" gradient-primary/10 border-primary/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{stat.label}</CardTitle>
               <stat.icon className="h-4 w-4 text-primary" />
@@ -52,7 +61,7 @@ export default function ReportesPage() {
         </TabsList>
 
         <TabsContent value="ventas" className="space-y-4">
-          <Card className="card-hover">
+          <Card className="">
             <CardHeader>
               <CardTitle>Ingresos por Mes</CardTitle>
               <CardDescription>Evolución de tus ingresos en los últimos 6 meses</CardDescription>
@@ -69,7 +78,7 @@ export default function ReportesPage() {
         </TabsContent>
 
         <TabsContent value="servicios" className="space-y-4">
-          <Card className="card-hover">
+          <Card className="">
             <CardHeader>
               <CardTitle>Top Servicios</CardTitle>
               <CardDescription>Servicios con mejor rendimiento</CardDescription>
@@ -101,7 +110,7 @@ export default function ReportesPage() {
         </TabsContent>
 
         <TabsContent value="clientes" className="space-y-4">
-          <Card className="card-hover">
+          <Card className="">
             <CardHeader>
               <CardTitle>Análisis de Clientes</CardTitle>
               <CardDescription>Estadísticas de tus clientes</CardDescription>

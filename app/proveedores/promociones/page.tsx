@@ -4,7 +4,8 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Tag, Plus, Calendar } from "lucide-react"
+import { Tag, Plus, Calendar, ArrowLeft } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 type Promocion = {
   id: string
@@ -39,6 +40,7 @@ const promocionesIniciales: Promocion[] = [
 
 export default function PromocionesPage() {
   const [promociones] = useState<Promocion[]>(promocionesIniciales)
+  const router = useRouter()
 
   const getEstadoBadge = (estado: string) => {
     switch (estado) {
@@ -55,6 +57,12 @@ export default function PromocionesPage() {
 
   return (
     <div className="space-y-6">
+      <div className="mb-4">
+        <Button variant="ghost" onClick={() => router.push("/proveedores")} className="gap-2">
+          <ArrowLeft className="h-4 w-4" />
+          Volver
+        </Button>
+      </div>
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Promociones Propias</h1>
@@ -68,7 +76,7 @@ export default function PromocionesPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {promociones.map((promocion) => (
-          <Card key={promocion.id} className="hover:shadow-lg transition-shadow">
+          <Card key={promocion.id} className="transition-shadow">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2">

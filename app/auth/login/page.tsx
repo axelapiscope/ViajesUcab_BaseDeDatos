@@ -18,7 +18,6 @@ export default function LoginPage() {
   const { toast } = useToast()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [role, setRole] = useState<UserRole>("cliente")
   const [isLoading, setIsLoading] = useState(false)
 
   const redirectTo = searchParams.get("redirect") || "/"
@@ -28,19 +27,23 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      login(email, password, role)
+      login(email, password)
+      const existingUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]")
+      const user = existingUsers.find((u: any) => u.email === email)
+      const userRole = user?.role || "cliente"
+      
       toast({
         title: "Inicio de sesión exitoso",
-        description: `Bienvenido como ${role}`,
+        description: `Bienvenido como ${userRole}`,
       })
       
       // Redirigir según el rol
       if (redirectTo && redirectTo !== "/") {
         router.push(redirectTo)
       } else {
-        if (role === "admin") {
+        if (userRole === "admin") {
           router.push("/admin")
-        } else if (role === "proveedor") {
+        } else if (userRole === "proveedor") {
           router.push("/proveedores")
         } else {
           router.push("/clientes")
@@ -69,19 +72,6 @@ export default function LoginPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="role">Tipo de Usuario</Label>
-              <Select value={role} onValueChange={(value) => setRole(value as UserRole)}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="cliente">Cliente</SelectItem>
-                  <SelectItem value="proveedor">Proveedor</SelectItem>
-                  <SelectItem value="admin">Administrador</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
             <div className="space-y-2">
               <Label htmlFor="email">Correo electrónico</Label>
               <Input

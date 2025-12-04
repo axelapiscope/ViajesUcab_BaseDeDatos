@@ -48,7 +48,13 @@ export function NotificationsDropdown() {
   const handleNotificationClick = (notification: any) => {
     markAsRead(notification.id)
     if (notification.link) {
-      router.push(notification.link)
+      try {
+        router.push(notification.link)
+      } catch (error) {
+        console.error("Error navigating to notification link:", error)
+        // Si hay error, redirigir a la página principal
+        router.push("/")
+      }
     }
   }
 

@@ -27,7 +27,10 @@ import { Separator } from "@/components/ui/separator"
 import { useCurrency } from "@/lib/currency-context"
 import { useWishlist } from "@/lib/wishlist-context"
 import { useUser } from "@/lib/user-context"
+import { useCart } from "@/lib/cart-context"
 import { cn } from "@/lib/utils"
+import { useToast } from "@/hooks/use-toast"
+import { useEffect } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
@@ -762,10 +765,20 @@ export function ServiceDetailPage({ serviceId }: ServiceDetailPageProps) {
   const { convertPrice } = useCurrency()
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
   const { user, updateProfile } = useUser()
+  const { addToCart } = useCart()
   const { toast } = useToast()
 
   const [selectedVehicleType, setSelectedVehicleType] = useState<string>("")
   const [selectedBrand, setSelectedBrand] = useState<string>("")
+
+  // Restaurar scroll position al cargar
+  useEffect(() => {
+    const scrollY = sessionStorage.getItem('scrollPosition')
+    if (scrollY) {
+      window.scrollTo(0, Number.parseInt(scrollY))
+      sessionStorage.removeItem('scrollPosition')
+    }
+  }, [])
 
   const service = allServices.find((s) => s.id === Number.parseInt(serviceId))
 
@@ -814,6 +827,17 @@ export function ServiceDetailPage({ serviceId }: ServiceDetailPageProps) {
       return
     }
 
+    // Add compensation to cart
+    addToCart({
+      id: `carbon-${serviceId}-${Date.now()}`,
+      title: `Compensación de carbono - ${service.title}`,
+      location: service.location,
+      price: carbonFootprint.cost,
+      image: service.image ?? "",
+      type: "tour",
+      companyName: "ViajesUCAB",
+    })
+
     // Update user's carbon compensation history
     const newCompensation = {
       date: new Date().toISOString(),
@@ -831,8 +855,8 @@ export function ServiceDetailPage({ serviceId }: ServiceDetailPageProps) {
     updateProfile({ carbonCompensations: updatedCompensations })
 
     toast({
-      title: "¡Compensación exitosa!",
-      description: `Has compensado ${carbonFootprint.kg} kg de CO₂. Gracias por contribuir al medio ambiente.`,
+      title: "¡Compensación agregada al carrito!",
+      description: `Se agregó la compensación de ${carbonFootprint.kg} kg de CO₂ ($${carbonFootprint.cost} USD) a tu carrito.`,
     })
   }
 
@@ -876,10 +900,17 @@ export function ServiceDetailPage({ serviceId }: ServiceDetailPageProps) {
     router.push(`/reserva/${serviceId}`)
   }
 
+  const handleBack = () => {
+    // Preservar scroll position usando sessionStorage
+    const scrollY = window.scrollY
+    sessionStorage.setItem('scrollPosition', scrollY.toString())
+    router.back()
+  }
+
   return (
     <div className="bg-background">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
-        <Button variant="ghost" onClick={() => router.back()} className="mb-6 gap-2">
+        <Button variant="ghost" onClick={handleBack} className="mb-6 gap-2">
           <ArrowLeft className="h-4 w-4" />
           Volver
         </Button>

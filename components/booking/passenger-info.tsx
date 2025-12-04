@@ -161,7 +161,7 @@ export function PassengerInfo({ bookingData, updateBookingData, onNext, onBack }
           Atrás
         </Button>
         <Button size="lg" onClick={handleNext}>
-          Siguiente
+          Comprar
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>

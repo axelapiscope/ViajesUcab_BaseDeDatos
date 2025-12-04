@@ -59,20 +59,82 @@ export function SeatSelection({ serviceId, bookingData, updateBookingData, onNex
     <div className="space-y-6">
       <Card>
         <CardContent className="space-y-6 pt-6">
-          {/* Flight/Bus Seat Selection */}
-          {(type === "vuelos" || type === "traslados") && (
+          {/* Flight Seat Selection */}
+          {type === "vuelos" && (
             <div>
               <h3 className="font-semibold mb-4">Selecciona tu Asiento</h3>
               <RadioGroup value={selectedSeat} onValueChange={setSelectedSeat}>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {["1A", "1B", "1C", "1D", "2A", "2B", "2C", "2D", "3A", "3B", "3C", "3D"].map((seat) => (
-                    <div key={seat} className="flex items-center space-x-2">
-                      <RadioGroupItem value={seat} id={seat} />
-                      <Label htmlFor={seat} className="cursor-pointer">
-                        Asiento {seat}
-                      </Label>
-                    </div>
-                  ))}
+                <div className="space-y-4">
+                  <div className="text-sm text-muted-foreground mb-2">Fila 1-10 (Económica)</div>
+                  <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
+                    {Array.from({ length: 40 }, (_, i) => {
+                      const row = Math.floor(i / 4) + 1
+                      const seatLetter = ["A", "B", "C", "D"][i % 4]
+                      const seat = `${row}${seatLetter}`
+                      return (
+                        <div key={seat} className="flex items-center space-x-1">
+                          <RadioGroupItem value={seat} id={seat} />
+                          <Label htmlFor={seat} className="cursor-pointer text-xs">
+                            {seat}
+                          </Label>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <div className="text-sm text-muted-foreground mt-4 mb-2">Fila 11-15 (Ejecutiva)</div>
+                  <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
+                    {Array.from({ length: 20 }, (_, i) => {
+                      const row = Math.floor(i / 4) + 11
+                      const seatLetter = ["A", "B", "C", "D"][i % 4]
+                      const seat = `${row}${seatLetter}`
+                      return (
+                        <div key={seat} className="flex items-center space-x-1">
+                          <RadioGroupItem value={seat} id={seat} />
+                          <Label htmlFor={seat} className="cursor-pointer text-xs">
+                            {seat}
+                          </Label>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              </RadioGroup>
+            </div>
+          )}
+
+          {/* Transfer/Car Selection - No seat numbers */}
+          {type === "traslados" && (
+            <div>
+              <h3 className="font-semibold mb-4">Tipo de Vehículo</h3>
+              <RadioGroup value={selectedSeat} onValueChange={setSelectedSeat}>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2 p-4 border rounded-lg">
+                    <RadioGroupItem value="sedan" id="sedan" />
+                    <Label htmlFor="sedan" className="cursor-pointer flex-1">
+                      <div>
+                        <p className="font-medium">Sedán</p>
+                        <p className="text-sm text-muted-foreground">Hasta 4 pasajeros</p>
+                      </div>
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2 p-4 border rounded-lg">
+                    <RadioGroupItem value="suv" id="suv" />
+                    <Label htmlFor="suv" className="cursor-pointer flex-1">
+                      <div>
+                        <p className="font-medium">SUV</p>
+                        <p className="text-sm text-muted-foreground">Hasta 6 pasajeros</p>
+                      </div>
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2 p-4 border rounded-lg">
+                    <RadioGroupItem value="van" id="van" />
+                    <Label htmlFor="van" className="cursor-pointer flex-1">
+                      <div>
+                        <p className="font-medium">Van</p>
+                        <p className="text-sm text-muted-foreground">Hasta 8 pasajeros</p>
+                      </div>
+                    </Label>
+                  </div>
                 </div>
               </RadioGroup>
             </div>
@@ -368,7 +430,7 @@ export function SeatSelection({ serviceId, bookingData, updateBookingData, onNex
 
       <div className="flex justify-end">
         <Button size="lg" onClick={handleNext}>
-          Siguiente
+          Comprar
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>

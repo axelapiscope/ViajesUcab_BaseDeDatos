@@ -13,12 +13,14 @@ import { usePurchaseHistory } from "@/lib/purchase-history-context"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { CreditCard, User, Mail, Phone, MapPin } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
 
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart()
   const { convertPrice } = useCurrency()
   const { addPurchase } = usePurchaseHistory()
   const router = useRouter()
+  const { toast } = useToast()
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -43,8 +45,68 @@ export default function CheckoutPage() {
     })
   }
 
+  const validateCardNumber = (cardNumber: string): boolean => {
+    const cleaned = cardNumber.replace(/\s/g, "")
+    return /^\d{13,19}$/.test(cleaned)
+  }
+
+  const validateExpiryDate = (expiryDate: string): boolean => {
+    const regex = /^(0[1-9]|1[0-2])\/(\d{2})$/
+    if (!regex.test(expiryDate)) return false
+    
+    const [month, year] = expiryDate.split("/")
+    const expiry = new Date(2000 + Number.parseInt(year), Number.parseInt(month) - 1)
+    const now = new Date()
+    return expiry > now
+  }
+
+  const validateCVV = (cvv: string): boolean => {
+    return /^\d{3,4}$/.test(cvv)
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Validar tarjeta
+    if (!validateCardNumber(formData.cardNumber)) {
+      toast({
+        title: "Error de validación",
+        description: "El número de tarjeta no es válido. Debe tener entre 13 y 19 dígitos.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    // Validar fecha de vencimiento
+    if (!validateExpiryDate(formData.expiryDate)) {
+      toast({
+        title: "Error de validación",
+        description: "La fecha de vencimiento no es válida o está vencida. Use el formato MM/AA.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    // Validar CVV
+    if (!validateCVV(formData.cvv)) {
+      toast({
+        title: "Error de validación",
+        description: "El CVV debe tener 3 o 4 dígitos.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Error de validación",
+        description: "El correo electrónico no es válido.",
+        variant: "destructive",
+      })
+      return
+    }
 
     // Generate reservation number
     const reservationNumber = `VU${Date.now().toString().slice(-8)}`
@@ -222,7 +284,12 @@ export default function CheckoutPage() {
                           name="cardNumber"
                           placeholder="1234 5678 9012 3456"
                           value={formData.cardNumber}
-                          onChange={handleInputChange}
+                          onChange={(e) => {
+                            // Formatear número de tarjeta con espacios cada 4 dígitos
+                            const value = e.target.value.replace(/\s/g, "").replace(/\D/g, "")
+                            const formatted = value.match(/.{1,4}/g)?.join(" ") || value
+                            setFormData({ ...formData, cardNumber: formatted.slice(0, 19) })
+                          }}
                           maxLength={19}
                           required
                         />
@@ -235,7 +302,14 @@ export default function CheckoutPage() {
                             name="expiryDate"
                             placeholder="MM/AA"
                             value={formData.expiryDate}
-                            onChange={handleInputChange}
+                            onChange={(e) => {
+                              // Formatear fecha MM/AA
+                              let value = e.target.value.replace(/\D/g, "")
+                              if (value.length >= 2) {
+                                value = value.slice(0, 2) + "/" + value.slice(2, 4)
+                              }
+                              setFormData({ ...formData, expiryDate: value.slice(0, 5) })
+                            }}
                             maxLength={5}
                             required
                           />

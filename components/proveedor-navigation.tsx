@@ -102,7 +102,7 @@ export function ProveedorNavigation() {
                     <p className="text-xs text-muted-foreground">Proveedor</p>
                   </div>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => router.push("/proveedores/perfil")}>
+                  <DropdownMenuItem onClick={() => router.push("/perfil")}>
                     <User className="mr-2 h-4 w-4" />
                     Mi Perfil
                   </DropdownMenuItem>

@@ -31,7 +31,7 @@ export function NotificationsProvider({ children }: { children: ReactNode }) {
       type: "offer",
       timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
       read: false,
-      link: "/vuelos",
+      link: "/",
     },
     {
       id: "2",
@@ -40,7 +40,7 @@ export function NotificationsProvider({ children }: { children: ReactNode }) {
       type: "package",
       timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
       read: false,
-      link: "/paquetes",
+      link: "/",
     },
     {
       id: "3",
@@ -49,7 +49,7 @@ export function NotificationsProvider({ children }: { children: ReactNode }) {
       type: "expiring",
       timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(),
       read: false,
-      link: "/hoteles",
+      link: "/",
     },
     {
       id: "4",
@@ -58,7 +58,7 @@ export function NotificationsProvider({ children }: { children: ReactNode }) {
       type: "low-stock",
       timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
       read: true,
-      link: "/cruceros",
+      link: "/",
     },
   ])
 

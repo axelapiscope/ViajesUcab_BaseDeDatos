@@ -20,7 +20,7 @@ export const restaurants = [
     reviews: 3250,
     priceRange: "$$$$",
     specialties: ["Atún crudo", "Langosta", "Caviar"],
-    image: "/restaurant-fine-dining.svg",
+    image: "/luxury-hotel.jpg",
     description:
       "Restaurante de tres estrellas Michelin especializado en mariscos frescos con técnicas francesas contemporáneas. Una experiencia culinaria inolvidable en el corazón de Manhattan.",
     hours: "Lun-Sáb: 12:00 PM - 10:30 PM, Dom: Cerrado",
@@ -71,7 +71,7 @@ export const restaurants = [
     reviews: 2890,
     priceRange: "$$$$",
     specialties: ["Omakase", "Nigiri premium", "Sushi tradicional"],
-    image: "/restaurant-sushi.svg",
+    image: "/maldives-beach-dinner.jpg",
     description:
       "Legendario restaurante de sushi con tres estrellas Michelin, dirigido por el maestro Jiro Ono. Una experiencia única de omakase con los mejores pescados del mercado de Tsukiji.",
     hours: "Lun-Vie: 11:30 AM - 2:00 PM, 5:30 PM - 8:30 PM, Sáb-Dom: Cerrado",
@@ -122,7 +122,7 @@ export const restaurants = [
     reviews: 2150,
     priceRange: "$$$$",
     specialties: ["Pasta artesanal", "Risotto", "Postres innovadores"],
-    image: "/restaurant-italian.svg",
+    image: "/luxury-resort.jpg",
     description:
       "Tres estrellas Michelin y nombrado mejor restaurante del mundo. El chef Massimo Bottura reinventa la cocina italiana tradicional con técnicas vanguardistas.",
     hours: "Mar-Sáb: 12:30 PM - 2:30 PM, 7:30 PM - 11:00 PM, Dom-Lun: Cerrado",
@@ -173,7 +173,7 @@ export const restaurants = [
     reviews: 2680,
     priceRange: "$$$$",
     specialties: ["Cocina molecular", "Vinos catalanes", "Postres creativos"],
-    image: "/restaurant-spanish.svg",
+    image: "/beach-resort.jpg",
     description:
       "Tres estrellas Michelin dirigido por los hermanos Roca. Combina tradición catalana con innovación culinaria de vanguardia y una bodega excepcional.",
     hours: "Mar-Sáb: 1:00 PM - 3:30 PM, 8:30 PM - 11:00 PM, Dom-Lun: Cerrado",
@@ -224,7 +224,7 @@ export const restaurants = [
     reviews: 1950,
     priceRange: "$$$$",
     specialties: ["Ingredientes nórdicos", "Fermentación", "Forrajeo"],
-    image: "/restaurant-nordic.svg",
+    image: "/santorini-oia-sunset.jpg",
     description:
       "Pionero de la Nueva Cocina Nórdica con tres estrellas Michelin. El chef René Redzepi utiliza ingredientes locales y técnicas de fermentación para crear platos únicos.",
     hours: "Mié-Sáb: 6:00 PM - 12:00 AM, Dom-Mar: Cerrado",
@@ -275,7 +275,7 @@ export const restaurants = [
     reviews: 2340,
     priceRange: "$$$$",
     specialties: ["Cocina molecular india", "Menú emoji", "Especias exóticas"],
-    image: "/restaurant-indian.svg",
+    image: "/maldives-underwater-restaurant.jpg",
     description:
       "Restaurante innovador que fusiona cocina india con técnicas moleculares. El chef Gaggan Anand ofrece un menú único representado por emojis, creando una experiencia gastronómica lúdica.",
     hours: "Mar-Dom: 6:00 PM - 11:30 PM, Lun: Cerrado",

@@ -27,7 +27,15 @@ export function PaymentStep({ bookingData, updateBookingData, onNext, onBack }: 
   const [amount1, setAmount1] = useState("")
   const [amount2, setAmount2] = useState("")
 
-  const totalAmount = 599 // This should come from bookingData
+  // Calculate total from booking data
+  const basePrice = bookingData?.service?.price || 450
+  const additionalServicesCost = bookingData?.additionalServices?.services?.length 
+    ? (bookingData.additionalServices.services.includes("seguro") ? 45 : 0) +
+      (bookingData.additionalServices.services.includes("comida-especial") ? 20 : 0) +
+      ((bookingData.additionalServices?.extraLuggage || 0) * 30)
+    : 0
+  const taxes = (basePrice + additionalServicesCost) * 0.16
+  const totalAmount = basePrice + additionalServicesCost + taxes
 
   const handleNext = () => {
     updateBookingData({
@@ -564,20 +572,22 @@ export function PaymentStep({ bookingData, updateBookingData, onNext, onBack }: 
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Servicio</span>
-                  <span className="font-medium">$450</span>
+                  <span className="font-medium">${basePrice.toFixed(2)}</span>
                 </div>
+                {additionalServicesCost > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Servicios adicionales</span>
+                    <span className="font-medium">${additionalServicesCost.toFixed(2)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Servicios adicionales</span>
-                  <span className="font-medium">$95</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Impuestos</span>
-                  <span className="font-medium">$54</span>
+                  <span className="text-muted-foreground">Impuestos (16%)</span>
+                  <span className="font-medium">${taxes.toFixed(2)}</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
                   <span className="font-semibold">Total</span>
-                  <span className="font-bold text-lg text-primary">$599</span>
+                  <span className="font-bold text-lg text-primary">${totalAmount.toFixed(2)}</span>
                 </div>
               </div>
 

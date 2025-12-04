@@ -27,10 +27,23 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      login(email, password)
+      // Verificar primero si el usuario existe antes de intentar login
       const existingUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]")
       const user = existingUsers.find((u: any) => u.email === email)
-      const userRole = user?.role || "cliente"
+      
+      if (!user) {
+        toast({
+          title: "Usuario no registrado",
+          description: "Por favor regístrate primero antes de iniciar sesión",
+          variant: "destructive",
+        })
+        setIsLoading(false)
+        return
+      }
+
+      // Si el usuario existe, proceder con el login
+      login(email, password)
+      const userRole = user.role || "cliente"
       
       toast({
         title: "Inicio de sesión exitoso",
@@ -52,7 +65,7 @@ export default function LoginPage() {
     } catch (error) {
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Credenciales inválidas",
+        description: error instanceof Error ? error.message : "Error al iniciar sesión. Por favor intenta de nuevo.",
         variant: "destructive",
       })
     } finally {

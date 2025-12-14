@@ -109,6 +109,12 @@ export default function ReportesPage() {
               required
             >
               <option value="">Selecciona un reporte</option>
+              <option value="MP_Combinacion">
+                Ingresos netos por metodo de pago combinados
+              </option>
+              <option value="MillasOtorgadas">
+                Milla otorgadas por compra de servicos adicionales
+              </option>
               <option value="CanjesDePaquetePorMilla">Canjes de Paquete por Milla</option>
               <option value="ClienteConMayorFrecuenciaDeViajesCompleto">
                 Cliente con Mayor Frecuencia de Viajes Completo
@@ -116,6 +122,7 @@ export default function ReportesPage() {
               <option value="Top10ServiciosAdicionalesMasVendidosjrxml">
                 Top 10 Servicios Adicionales Más Vendidos
               </option>
+              
             </select>
           </div>
           <Button type="submit" className="w-full">

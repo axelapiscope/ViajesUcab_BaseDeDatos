@@ -1,10 +1,8 @@
 {
 	"folders": [
 		{
+			"name": "VIAJESUCAB-unificado",
 			"path": "."
-		},
-		{
-			"path": ".."
 		}
 	],
 	"settings": {}

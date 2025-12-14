@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TrendingUp, DollarSign, Users, Calendar, BarChart3, ArrowLeft } from "lucide-react"
@@ -9,6 +10,20 @@ import { useRouter } from "next/navigation"
 
 export default function ReportesPage() {
   const router = useRouter()
+  const [fechaInicio, setFechaInicio] = useState("")
+  const [fechaFin, setFechaFin] = useState("")
+  const [nombreReporte, setNombreReporte] = useState("")
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!fechaInicio || !fechaFin || !nombreReporte) {
+      alert("Por favor, completa todos los campos.")
+      return
+    }
+    const url = `http://localhost:8081/reporte?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}&nombreReporte=${nombreReporte}`
+    window.open(url, "_blank")
+  }
+
   const stats = [
     { label: "Reservas Totales", value: "1,234", change: "+12.5%", icon: Calendar },
     { label: "Ingresos del Mes", value: "$45,230", change: "+18.2%", icon: DollarSign },
@@ -51,6 +66,62 @@ export default function ReportesPage() {
             </CardContent>
           </Card>
         ))}
+      </div>
+
+      <div className="p-6 bg-muted/10 rounded-lg">
+        <h2 className="text-xl font-bold mb-4">Descargar Reportes</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="fechaInicio" className="block text-sm font-medium mb-1">
+              Fecha Inicio:
+            </label>
+            <input
+              type="date"
+              id="fechaInicio"
+              value={fechaInicio}
+              onChange={(e) => setFechaInicio(e.target.value)}
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="fechaFin" className="block text-sm font-medium mb-1">
+              Fecha Fin:
+            </label>
+            <input
+              type="date"
+              id="fechaFin"
+              value={fechaFin}
+              onChange={(e) => setFechaFin(e.target.value)}
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="nombreReporte" className="block text-sm font-medium mb-1">
+              Nombre del Reporte:
+            </label>
+            <select
+              id="nombreReporte"
+              value={nombreReporte}
+              onChange={(e) => setNombreReporte(e.target.value)}
+              className="w-full p-2 border rounded"
+              required
+            >
+              <option value="">Selecciona un reporte</option>
+              <option value="CanjesDePaquetePorMilla">Canjes de Paquete por Milla</option>
+              <option value="ClienteConMayorFrecuenciaDeViajesCompleto">
+                Cliente con Mayor Frecuencia de Viajes Completo
+              </option>
+              <option value="Top10ServiciosAdicionalesMasVendidosjrxml">
+                Top 10 Servicios Adicionales Más Vendidos
+              </option>
+            </select>
+          </div>
+          <Button type="submit" className="w-full">
+            Descargar Reporte
+          </Button>
+        </form>
       </div>
 
       <Tabs defaultValue="ventas" className="space-y-4">
